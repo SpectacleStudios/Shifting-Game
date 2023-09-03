@@ -1,0 +1,68 @@
+local userInput = game:GetService('UserInputService')
+local Players = game:GetService('Players')
+
+local ss = game:GetService("ServerStorage")
+local mouse = workspace:WaitForChild("Rat")
+
+local player = game.Players.LocalPlayer
+local morphed = false
+
+
+
+
+
+local function morph(input, gameProcessed)
+	if not gameProcessed then
+		
+		if input.userInputType == Enum.UserInputType.Keyboard then
+			
+			local keycode = input.KeyCode
+			
+			if keycode == Enum.KeyCode.M then
+				
+				
+
+				if morphed == false then --morphs to mouse
+					
+					playerModel = player.Character
+				
+					
+					
+					mouseClone = mouse:Clone()	
+					
+					mouseClone:SetPrimaryPartCFrame(playerModel.PrimaryPart.CFrame)
+					
+					player.Character = mouseClone
+					mouseClone.Parent = workspace
+					playerModel:SetPrimaryPartCFrame(workspace.humanoidplate.CFrame)
+					morphed = true
+				else --morphs back to character
+					
+					
+					
+					player.Character = playerModel
+					
+					playerModel:SetPrimaryPartCFrame(mouseClone.PrimaryPart.CFrame)
+					mouseClone:Destroy()
+					workspace.CurrentCamera.CameraSubject = playerModel.Humanoid
+					morphed = false
+					
+						
+				end
+
+
+
+
+
+
+			end
+
+
+
+		end
+	end
+
+
+end
+
+userInput.InputBegan:Connect(morph)	
