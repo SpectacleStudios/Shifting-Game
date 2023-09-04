@@ -2,12 +2,12 @@ local userInput = game:GetService('UserInputService')
 local Players = game:GetService('Players')
 
 local ss = game:GetService("ServerStorage")
-local mouse = workspace:WaitForChild("Rat")
+local mouse = workspace.Morphs.Mouse:WaitForChild("Rat")
 
 local player = game.Players.LocalPlayer
 local morphed = false
 
-
+local squeak = workspace.Sounds:WaitForChild("Mouse Squeak")
 
 
 
@@ -35,6 +35,7 @@ local function morph(input, gameProcessed)
 					player.Character = mouseClone
 					mouseClone.Parent = workspace
 					playerModel:SetPrimaryPartCFrame(workspace.humanoidplate.CFrame)
+					squeak:Play()
 					morphed = true
 				else --morphs back to character
 					
